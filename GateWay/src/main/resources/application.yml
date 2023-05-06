@@ -1,0 +1,22 @@
+server:
+  port: 8081
+  
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: CLIENT-1
+          uri: lb://CLIENT-1
+          predicates:
+            - Path=/client-1/**
+eureka:
+  instance:
+    prefer-ip-address: true # To register the microservice in service registry with the IP address instead of host name
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:8761/eureka} 
+        
